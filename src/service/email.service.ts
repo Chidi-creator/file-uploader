@@ -15,10 +15,12 @@ class EmailService {
 
   constructor() {
     this.transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: env.MAIL_HOST,
+      port: env.MAIL_PORT,
+      secure: env.MAIL_SECURE,
       auth: {
-        user: env.SMTP_USER,
-        pass: env.SMTP_PASS,
+        user: env.MAIL_USER,
+        pass: env.MAIL_PASS,
       },
     });
   }
@@ -73,7 +75,7 @@ class EmailService {
     `;
 
     await this.transporter.sendMail({
-      from: `"File Uploader" <${env.SMTP_USER}>`,
+      from: `"File Uploader" <${env.MAIL_FROM}>`,
       to,
       subject: `Upload Summary — ${summary.fileName} (${summary.inserted}/${summary.totalRows} inserted)`,
       html,

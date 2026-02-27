@@ -43,7 +43,7 @@ export async function processDiseaseJob(
 
   for (let i = 0; i < rows.length; i++) {
     const row = rows[i];
-    const rowNumber = i + 2; // +2: 1-based index + 1 header row
+    const rowNumber = i + 2; 
 
     if (!row.diseaseCode || !row.name || !row.catId) {
       result.failed++;

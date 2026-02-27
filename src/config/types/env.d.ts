@@ -6,7 +6,11 @@ export interface EnvConfig {
   REDIS_USERNAME: string;
   REDIS_PASSWORD: string;
   JWT_SECRET: string;
-  SMTP_USER: string;
-  SMTP_PASS: string;
+  MAIL_HOST: string;
+  MAIL_PORT: number;
+  MAIL_SECURE: boolean;
+  MAIL_USER: string;
+  MAIL_PASS: string;
+  MAIL_FROM: string;
   NOTIFY_EMAIL: string;
 }

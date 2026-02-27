@@ -11,15 +11,7 @@ export interface JobStatus<TResult> {
   failedReason?: string;
 }
 
-/**
- * Abstract base engine.
- * - startWorker()    → called ONCE at app boot; keeps a persistent worker alive
- * - enqueue(data)    → adds a job to the queue and returns the jobId immediately
- * - getJobStatus(id) → polls the current state, progress, and result of a job
- *
- * Subclasses declare a queue name and provide a processor function. Nothing
- * outside this file needs to know about BullMQ internals.
- */
+
 abstract class QueueEngine<TData, TResult> {
   protected abstract readonly queueName: string;
   protected abstract getProcessor(): JobProcessor<TData, TResult>;
@@ -34,10 +26,7 @@ abstract class QueueEngine<TData, TResult> {
     return this.queue;
   }
 
-  /**
-   * Start the persistent background worker.
-   * Call once at app boot — after the DB connection is open.
-   */
+ 
   async startWorker(): Promise<void> {
     if (this.worker) return;
 
@@ -57,10 +46,7 @@ abstract class QueueEngine<TData, TResult> {
     console.log(`[${this.queueName}] worker started`);
   }
 
-  /**
-   * Add a job and return its ID. Returns immediately — the worker handles
-   * processing in the background.
-   */
+  
   async enqueue(data: TData): Promise<string> {
     const queue = await this.getQueue();
     const job = await queue.add("job", data, {
@@ -71,9 +57,7 @@ abstract class QueueEngine<TData, TResult> {
     return job.id!;
   }
 
-  /**
-   * Poll the status of a previously enqueued job.
-   */
+
   async getJobStatus(jobId: string): Promise<JobStatus<TResult>> {
     const queue = await this.getQueue();
     const job = await queue.getJob(jobId);
