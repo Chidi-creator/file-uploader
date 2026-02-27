@@ -20,13 +20,24 @@ class UploadHandler {
         notifyEmail: env.NOTIFY_EMAIL,
       };
 
-      const result = await csvUploadEngine.dispatch(jobData);
+      const jobId = await csvUploadEngine.enqueue(jobData);
 
       return responseManager.success(
         res,
-        { summary: result },
-        `CSV processed: ${result.inserted}/${result.totalRows} records inserted into '${collectionName}'`
+        { jobId },
+        "File uploaded and queued for processing. Poll /api/upload/status/:jobId for results.",
+        202
       );
+    } catch (error: any) {
+      return responseManager.handleError(res, error);
+    }
+  };
+
+  public getJobStatus = async (req: Request, res: Response) => {
+    try {
+      const jobId = req.params.jobId as string;
+      const status = await csvUploadEngine.getJobStatus(jobId);
+      return responseManager.success(res, status);
     } catch (error: any) {
       return responseManager.handleError(res, error);
     }

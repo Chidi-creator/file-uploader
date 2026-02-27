@@ -10,4 +10,8 @@ router
   .route("/csv")
   .post(authenticateToken, upload.single("file"), uploadHandler.uploadCsv);
 
+router
+  .route("/status/:jobId")
+  .get(authenticateToken, uploadHandler.getJobStatus);
+
 export default router;
