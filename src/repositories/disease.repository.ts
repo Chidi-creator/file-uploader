@@ -5,8 +5,12 @@ import { DatabaseError } from "@managers/error.manager";
 class DiseaseRepository {
   async insertOne(data: Partial<IDisease>): Promise<IDisease> {
     try {
-      const disease = await Disease.create(data);
-      return disease;
+      const disease = await Disease.findOneAndUpdate(
+        { diseaseCode: data.diseaseCode },
+        { $set: data },
+        { upsert: true, new: true }
+      );
+      return disease as IDisease;
     } catch (error: any) {
       throw error;
     }

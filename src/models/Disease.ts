@@ -13,7 +13,6 @@ const diseaseSchema = new Schema<IDisease>(
   { timestamps: true }
 );
 
-diseaseSchema.index({ diseaseCode: 1 }, { unique: true });
 diseaseSchema.index({ catId: 1 });
 
 const Disease = mongoose.model<IDisease>("Disease", diseaseSchema);
