@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon"
+    "start": "nodemon",
+    "seed": "ts-node -r tsconfig-paths/register src/seeders/disease.seeder.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@types/multer": "^2.0.0",
+    "@types/nodemailer": "^7.0.11",
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.3",
     "bullmq": "^5.70.1",
@@ -23,6 +26,7 @@
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.2.3",
     "multer": "^2.0.2",
+    "nodemailer": "^8.0.1",
     "nodemon": "^3.1.14",
     "redis": "^5.11.0",
     "ts-node": "^10.9.2",

@@ -30,7 +30,8 @@
       "@auth/*": ["src/auth/*"],
       "@validation/*": ["src/validation/*"],
       "@engine/*": ["src/engine/*"],
-      
+      "@workers/*": ["src/workers/*"],
+      "@seeders/*": ["src/seeders/*"]
     }
   },
   "include": ["src/**/*"]

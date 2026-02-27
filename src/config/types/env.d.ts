@@ -6,4 +6,7 @@ export interface EnvConfig {
   REDIS_USERNAME: string;
   REDIS_PASSWORD: string;
   JWT_SECRET: string;
+  SMTP_USER: string;
+  SMTP_PASS: string;
+  NOTIFY_EMAIL: string;
 }
