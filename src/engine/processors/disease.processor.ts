@@ -2,7 +2,6 @@ import { Job } from "bullmq";
 import { parseCsvFile, mapRowToDisease } from "@service/upload.service";
 import DiseaseUseCase from "@usecases/disease.usecase";
 import EmailService, { UploadSummary } from "@service/email.service";
-import fs from "fs";
 
 export interface DiseaseJobData {
   filePath: string;
@@ -74,12 +73,6 @@ export async function processDiseaseJob(
     }
 
     await job.updateProgress(Math.round(((i + 1) / rows.length) * 100));
-  }
-
-  try {
-    fs.unlinkSync(filePath);
-  } catch (_) {
-    // ignore cleanup errors
   }
 
   const summary: UploadSummary = {

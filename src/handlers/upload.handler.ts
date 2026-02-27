@@ -25,7 +25,7 @@ class UploadHandler {
       return responseManager.success(
         res,
         { jobId },
-        "File uploaded and queued for processing. Poll /api/upload/status/:jobId for results.",
+        "File uploaded and queued for processing. You will receive an email notification once the job is complete.",
         202
       );
     } catch (error: any) {
